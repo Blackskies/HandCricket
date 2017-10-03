@@ -11,6 +11,7 @@ def main_game():
 	total_score = 0
 	total_balls = 0
 	user_input = None
+	free_hit = 0
 	serial_number = number_gen()
 	while True:
 		print(str(next(serial_number))+".")
@@ -18,7 +19,7 @@ def main_game():
 		try:
 			user_input = int(input("Type a number b/w (0,1,2,4,6):\t"))
 		except:
-			print("Choose number in [0,1,2,4,6]")
+			print("Choose number in range [0,6]")
 			continue
 		if user_input <= 6 and user_input >= 0 :# and user_input != 3 and\
 			# user_input != 5:
@@ -26,19 +27,26 @@ def main_game():
 			# gen_num = random.randint(0,6)
 			print("computer generated :"+str(gen_num))
 			print("\n")
-			if user_input == gen_num :
-				print("Empire says 'OUT' ")
-				total_balls = total_balls + 1
-				# print("Your total score is :\t"+str(total_score))
-				break
+			if free_hit == 0 :
+				if user_input == gen_num :
+					print("Empire says 'OUT' ")
+					# total_balls = total_balls + 1
+					# print("Your total score is :\t"+str(total_score))
+					break
 			else :
 				if user_input == 6 or user_input == 4 :
 					print("Empire says great work 'Its a "+str(user_input)+"\n")
+
+			free_hit = 0
+
 			if gen_num != 0 :
 				total_score = total_score + user_input
+
 			else :
 				print("Oops No ball\n")
 				total_balls = total_balls - 1
+				free_hit = 1
+				print("\n You got a free hit ;)")
 
 		else:
 			print("\nChoose number in range [0,6]\n")
@@ -47,7 +55,6 @@ def main_game():
 
 def display_score(total_balls,total_score,player_name):
 	print("\n*********************************************")
-	print(int(total_balls))
 	print("Well Played "+player_name+" , Here is your score")
 	print("Your total score is :\t"+str(total_score))
 	print("You Played "+ str(int(total_balls/6)) + " (Overs) and " \
@@ -56,7 +63,7 @@ def display_score(total_balls,total_score,player_name):
 	
 if __name__ == '__main__':
 	total_balls,total_score = main_game()
-	player_name = input("Enter you name :")
+	player_name = input("\nEnter you name :")
 	display_score(total_balls,total_score,player_name)
 	print("\n Keep playing  'Hand Cricket' the only fun game")
 # print(user_input, gen_num)
