@@ -1,4 +1,11 @@
 import random
+import sys
+
+def display_banner():
+	print("\n*********************************************")
+	print("\tLET'S PLAY HAND CRICKET")
+	print("START BATTING AND TASTE THE BOWLING OF COMPUTER")
+	print("\n")
 
 def number_gen():
 	a = 1
@@ -17,7 +24,10 @@ def main_game():
 		print(str(next(serial_number))+".")
 		total_balls = total_balls + 1
 		try:
-			user_input = int(input("Type a number b/w (0,1,2,4,6):\t"))
+			user_input = input("Type a number in range [0,6]:\t")
+			if user_input == "exit":
+				break
+			user_input = int(user_input)
 		except:
 			print("Choose number in range [0,6]")
 			continue
@@ -62,6 +72,7 @@ def display_score(total_balls,total_score,player_name):
 	print("\n*********************************************")
 	
 if __name__ == '__main__':
+	display_banner()
 	total_balls,total_score = main_game()
 	player_name = input("\nEnter you name :")
 	display_score(total_balls,total_score,player_name)
